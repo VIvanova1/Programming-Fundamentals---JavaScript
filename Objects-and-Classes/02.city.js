@@ -3,8 +3,6 @@ function city(city) {
     for (const [key, value] of arrCity) {
         console.log(`${key} -> ${value}`);
     }
-
-
 }
 city({
     name: "Sofia",
