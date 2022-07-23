@@ -4,18 +4,18 @@ function theImitationGame(input) {
     for (const line of input) {
         let tokens = line.split('|');
         let command = tokens[0];
-        let firstNumber = (tokens[1]);
-        let secNumber = (tokens[2]);
+        let first = (tokens[1]);
+        let second = (tokens[2]);
 
         switch (command) {
             case 'Move':
-                moveLetters(Number(firstNumber))
+                moveLetters(Number(first))
                 break;
             case 'Insert':
-                insertLetter(Number(firstNumber), secNumber)
+                insertLetter(Number(first), second)
                 break;
             case 'ChangeAll':
-                changeLetter(firstNumber, secNumber)
+                changeLetter(first, second)
                 break;
         }
     }
@@ -56,4 +56,16 @@ theImitationGame([
 ]);
 /*---result---
 The decrypted message is: Hello
+ */
+//---test 2 ---//
+theImitationGame([
+    'owyouh',
+    'Move|2',
+    'Move|3',
+    'Insert|3|are',
+    'Insert|9|?',
+    'Decode',
+]);
+/*---result---
+The decrypted message is: howareyou?
  */
