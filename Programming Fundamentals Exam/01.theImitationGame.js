@@ -18,28 +18,29 @@ function theImitationGame(input) {
                 changeLetter(firstNumber, secNumber)
                 break;
         }
-    }
 
-    function moveLetters(numberOfLetters) {
-        let resultAsArr = result.split('');
-        for (let index = 0; index < numberOfLetters; index++) {
-            let tempLetter = resultAsArr.shift();
-            resultAsArr.push(tempLetter)
+
+        function moveLetters(numberOfLetters) {
+            let resultAsArr = result.split('');
+            for (let index = 0; index < numberOfLetters; index++) {
+                let tempLetter = resultAsArr.shift();
+                resultAsArr.push(tempLetter)
+            }
+            result = resultAsArr.join('')
+
         }
-        result = resultAsArr.join('')
-        return result;
-    }
 
-    function insertLetter(index, value) {
-        let resultAsArr = result.split('');
-        resultAsArr.splice(index, 0, value);
-        result = resultAsArr.join('')
-        return result;
-    }
+        function insertLetter(index, value) {
+            let resultAsArr = result.split('');
+            resultAsArr.splice(index, 0, value);
+            result = resultAsArr.join('')
 
-    function changeLetter(substring, replacement) {
-        while (result.search(substring) != -1) {
-            result = result.replace(substring, replacement)
+        }
+
+        function changeLetter(substring, replacement) {
+            while (result.search(substring) != -1) {
+                result = result.replace(substring, replacement)
+            }
         }
     }
     console.log(`The decrypted message is: ${result}`);
