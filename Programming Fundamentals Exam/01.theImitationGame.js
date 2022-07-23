@@ -21,10 +21,12 @@ function theImitationGame(input) {
     }
 
     function moveLetters(numberOfLetters) {
+        let resultAsArr = result.split('');
         for (let index = 0; index < numberOfLetters; index++) {
-            let tempLetter = result.shift();
-            result.push(tempLetter)
+            let tempLetter = resultAsArr.shift();
+            resultAsArr.push(tempLetter)
         }
+        result = resultAsArr.join('')
         return result;
     }
 
@@ -40,7 +42,7 @@ function theImitationGame(input) {
             result = result.replace(substring, replacement)
         }
     }
-    console.log(result);
+    console.log(`The decrypted message is: ${result}`);
 }
 //---test 1 ---//
 theImitationGame([
