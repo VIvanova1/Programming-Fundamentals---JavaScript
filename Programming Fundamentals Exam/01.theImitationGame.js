@@ -20,7 +20,6 @@ function theImitationGame(input) {
         }
     }
 
-
     function moveLetters(numberOfLetters) {
         let resultAsArr = result.split('');
         for (let index = 0; index < numberOfLetters; index++) {
