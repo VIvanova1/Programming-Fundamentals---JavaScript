@@ -13,7 +13,7 @@ function thePianist(data) {
             pieceLab[piece][composer] = key;
         }
     }
-    console.table(pieceLab);
+
     for (const line of data) {
         let comandTokens = line.split('|');
         let command = comandTokens[0];
@@ -37,11 +37,11 @@ function thePianist(data) {
                 break;
         }
     }
-    console.table(pieceLab);
-    // for (let [piece, value] of Object.entries(pieceLab)) {
-    //     for (let [composer, key] of Object.entries(pieceLab[piece]))
-    //         console.log(`${piece} -> Composer: ${composer}, Key: ${key}`);
-    // }
+
+    for (let [piece, value] of Object.entries(pieceLab)) {
+        for (let [composer, key] of Object.entries(pieceLab[piece]))
+            console.log(`${piece} -> Composer: ${composer}, Key: ${key}`);
+    }
 
     function adding(piece, composer, key) {
         if (!pieceLab.hasOwnProperty(piece)) {
@@ -54,13 +54,7 @@ function thePianist(data) {
         if (!pieceLab[piece].hasOwnProperty(composer)) {
             pieceLab[piece][composer] = key;
         }
-        // if(pieceLab.hasOwnProperty(piece)){
-        //     console.log(`${piece} is already in the collection!`);
-        // }else{
-        //     pieceLab[piece] = {};
-        //     pieceLab[piece][composer] = key;
-        //     console.log(`${piece} by ${composer} in ${key} added to the collection!`);
-        // }
+
     }
 
     function removing(piece) {
@@ -78,7 +72,6 @@ function thePianist(data) {
             let [key, value] = Object.entries(info)
             let composerName = key[0];
             delete pieceLab[piece][composer];
-            //pieceLab[piece] = {};
             pieceLab[piece][composerName] = newKey
 
             console.log(`Changed the key of ${piece} to ${newKey}!`);
