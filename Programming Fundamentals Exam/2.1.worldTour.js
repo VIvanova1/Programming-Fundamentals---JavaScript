@@ -17,6 +17,9 @@ function worldTour(data) {
             case 'Switch':
                 switching(first, second)
                 break;
+            case 'Travel':
+                console.log(traveling());
+                break;
         }
     }
 
@@ -54,8 +57,6 @@ function worldTour(data) {
     function switching(first, second) {
         let index = desitnations.indexOf(first);
 
-
-        //"Albania:Bulgaria:Albania:Bulgaria:Deuchland:Albania:Bulgaria",
         while (index !== -1) {
             let endOldString = index + first.length;
             let destinationsAsArr = desitnations.split('');
@@ -64,41 +65,28 @@ function worldTour(data) {
             index = desitnations.indexOf(first);
             console.log(desitnations);
         }
-
     }
 }
-// //---test---//
-// worldTour(["Hawai::Cyprys-Greece",
-//     "Add Stop:7:Rome",
-//     "Remove Stop:11:16",
-//     "Switch:Hawai:Bulgaria",
-//     "Travel"
-// ]);
-// /*---result---
-// Hawai::RomeCyprys-Greece
-// Hawai::Rome-Greece
-// Bulgaria::Rome-Greece
-// Ready for world tour! Planned stops: Bulgaria::Rome-Greece
-//  */
-// console.log('--------');
-// //---test 2---//
-// worldTour(["Albania:Bulgaria:Cyprus:Deuchland",
-//     "Add Stop:3:Nigeria",
-//     "Remove Stop:4:8",
-//     "Switch:Albania: Azərbaycan",
-//     "Travel"
-// ]);
-
-// /*---result---
-// AlbNigeriaania:Bulgaria:Cyprus:Deuchland
-// AlbNaania:Bulgaria:Cyprus:Deuchland
-// AlbNaania:Bulgaria:Cyprus:Deuchland
-// Ready for world tour! Planned stops: AlbNaania:Bulgaria:Cyprus:Deuchland
-//  */
+//Still not working
+//---test---//
+worldTour(["Hawai::Cyprys-Greece",
+    "Add Stop:7:Rome",
+    "Remove Stop:11:16",
+    "Switch:Hawai:Bulgaria",
+    "Travel"
+]);
+/*---result---
+Hawai::RomeCyprys-Greece
+Hawai::Rome-Greece
+Bulgaria::Rome-Greece
+Ready for world tour! Planned stops: Bulgaria::Rome-Greece
+ */
 console.log('--------');
-//---test N---//
-worldTour(["Albania:Bulgaria:Albania:Bulgaria:Deuchland:Albania:Bulgaria",
-    "Switch:Albania:Bulgaria",
+//---test 2---//
+worldTour(["Albania:Bulgaria:Cyprus:Deuchland",
+    "Add Stop:3:Nigeria",
+    "Remove Stop:4:8",
+    "Switch:Albania: Azərbaycan",
     "Travel"
 ]);
 
