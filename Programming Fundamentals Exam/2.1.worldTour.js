@@ -1,73 +1,50 @@
 function worldTour(data) {
-    let desitnations = data.shift();
+    let destinations = data.shift();
+    const addingStop = (destinations, index, second) => {
+
+        if (index < destinations.length && index >= 0) {
+            return destinations.slice(0, index) + second + destinations.slice(index);
+        }
+
+        return destinations;
+    }
+
+    const removing = (destinations, startIndex, endIndex) => {
+        let bound = destinations.length;
+        if (startIndex < bound && endIndex < bound && startIndex >= 0 && endIndex >= 0) {
+            return destinations.slice(0, startIndex) + destinations.slice(endIndex + 1);
+        }
+        return destinations;
+    }
+
+    const switching = (destinations, first, second) => {
+        const regexp = new RegExp(first, 'g');
+        return destinations.replace(regexp, second)
+    }
 
     for (const line of data) {
-        let tokens = line.split(':');
-        let command = tokens[0];
-        let first = tokens[1];
-        let second = tokens[2];
+        if (line === 'Travel') break;
+        let [command, first, second] = line.split(':');
 
         switch (command) {
             case 'Add Stop':
-                addingStor(first, second)
+                destinations = addingStop(destinations, Number(first), second)
                 break;
             case 'Remove Stop':
-                removing(first, second)
+                destinations = removing(destinations, Number(first), Number(second))
                 break;
             case 'Switch':
-                switching(first, second)
+                destinations = switching(destinations, first, second)
                 break;
-            case 'Travel':
-                console.log(traveling());
-                break;
+            default:
+                console.log('No such command!');
+                continue;
         }
+        console.log(destinations);
     }
 
-    console.log(`Ready for world tour! Planned stops: ${desitnations}`);
-
-
-    //"Add Stop:{index}:{string}": Insert the given string at that index only if the index is valid
-    function addingStor(first, second) {
-        let index = Number(first);
-        let destinationsAsArr = desitnations.split('');
-
-        if (index < destinationsAsArr.length && index >= 0) {
-            destinationsAsArr.splice(index, 0, second);
-        }
-        desitnations = destinationsAsArr.join('')
-        console.log(desitnations);
-    }
-
-    //"Remove Stop:{start_index}:{end_index}":
-    //Remove the elements of the string from the starting index to the end index (inclusive) if both indices are valid
-    function removing(first, second) {
-        let startIndex = Number(first);
-        let endIndex = Number(second);
-        let destinationsAsArr = desitnations.split('');
-        let bound = destinationsAsArr.length;
-        if (startIndex < bound && endIndex < bound) {
-            destinationsAsArr.splice(startIndex, endIndex - startIndex + 1);
-        }
-        desitnations = destinationsAsArr.join('')
-        console.log(desitnations);
-    }
-
-    //"Switch:{old_string}:{new_string}":
-    //If the old string is in the initial string, replace it with the new one (all occurrences)
-    function switching(first, second) {
-        let index = desitnations.indexOf(first);
-
-        while (index !== -1) {
-            let endOldString = index + first.length;
-            let destinationsAsArr = desitnations.split('');
-            destinationsAsArr.splice(index, endOldString, second);
-            desitnations = destinationsAsArr.join('');
-            index = desitnations.indexOf(first);
-            console.log(desitnations);
-        }
-    }
+    console.log(`Ready for world tour! Planned stops: ${destinations}`);
 }
-//Still not working
 //---test---//
 worldTour(["Hawai::Cyprys-Greece",
     "Add Stop:7:Rome",
