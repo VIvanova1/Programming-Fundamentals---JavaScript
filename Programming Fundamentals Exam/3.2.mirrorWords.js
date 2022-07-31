@@ -1,5 +1,5 @@
 function mirrorWords(data) {
-    let pattern = /[@#](?<first>[A-Za-z]{3,})[@#][@#](?<second>[A-Za-z]{3,})[@#]/gm;
+    let pattern = /([@#])(?<first>[A-Za-z]{3,})\1\1(?<second>[A-Za-z]{3,})\1/gm
     let matches = [];
     let match = pattern.exec(data[0]);
     let mirrorWord = [];
