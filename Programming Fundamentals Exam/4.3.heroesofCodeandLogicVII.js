@@ -34,6 +34,7 @@ function heroesofCodeandLogicVII(data) {
                 break;
         }
     }
+
     for (const [name, values] of Object.entries(heroes)) {
         console.log(name);
         console.log(`  HP: ${values.HP}`);
