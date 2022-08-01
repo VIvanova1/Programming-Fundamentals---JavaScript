@@ -3,34 +3,35 @@ function dictionary(data) {
     let dictionaries = {};
 
     for (const element of data) {
-        let tempTerm = JSON.parse(element);
-        let entries = Object.entries(tempTerm);
-        dataForSort.push(entries);
-    }
+        let tempEl = JSON.parse(element);
+        let [word, definition] = Object.entries(tempEl);
+        let name = word[0];
+        let definitions = word[1]
 
-    let sortData = dataForSort.sort();
-
-
-    sortData.forEach(element => {
-        let tokens = element[0];
-        let term = tokens[0]
-        let definition = tokens[1];
-        dictionaries[term] = definition;
+        dictionaries[name] = {
+            definitions,
+        }
+    };
+    let sortedData = Object.entries(dictionaries).sort(([keyA, valueA], [keyB, valueB]) => {
+        return keyA.localeCompare(keyB);
     });
-    for (const key in dictionaries) {
-        console.log(`Term: ${key} => Definition: ${dictionaries[key]}`);
-    }
 
+    for (const [key, value] of sortedData) {
+        console.log(`Term: ${key} => Definition: ${value.definitions}`);
+    }
 
 }
 dictionary([
-        '{"Coffee":"A hot drink made from the roasted and ground seeds (coffee beans) of a tropical shrub."}',
-        '{"Bus":"A large motor vehicle carrying passengers by road, typically one serving the public on a fixed route and for a fare."}',
-        '{"Boiler":"A fuel-burning apparatus or container for heating water."}',
-        '{"Tape":"A narrow strip of material, typically used to hold or fasten something."}',
-        '{"Microphone":"An instrument for converting sound waves into electrical energy variations which may then be amplified, transmitted, or recorded."}'
-    ])
-    // dictionary([
-    //     '{"Coffee":"A hot drink made from the roasted and ground seeds (coffee beans) of a tropical shrub."}',
-    //     '{"Coffee":"A hot drink."}',
-    // ])
+    '{"Coffee":"A hot drink made from the roasted and ground seeds (coffee beans) of a tropical shrub."}',
+    '{"Bus":"A large motor vehicle carrying passengers by road, typically one serving the public on a fixed route and for a fare."}',
+    '{"Boiler":"A fuel-burning apparatus or container for heating water."}',
+    '{"Tape":"A narrow strip of material, typically used to hold or fasten something."}',
+    '{"Microphone":"An instrument for converting sound waves into electrical energy variations which may then be amplified, transmitted, or recorded."}'
+]);
+/* ---result---
+    Term: Boiler => Definition: A fuel-burning apparatus or container for heating water.
+Term: Bus => Definition: A large motor vehicle carrying passengers by road, typically one serving the public on a fixed route and for a fare.
+Term: Coffee => Definition: A hot drink made from the roasted and ground seeds (coffee beans) of a tropical shrub.
+Term: Microphone => Definition: An instrument for converting sound waves into electrical energy variations which may then be amplified, transmitted, or recorded.
+Term: Tape => Definition: A narrow strip of material, typically used to hold or fasten something.
+ */
